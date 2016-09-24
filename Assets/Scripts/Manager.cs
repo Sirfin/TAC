@@ -4,9 +4,10 @@ using System.Collections;
 public class Manager : MonoBehaviour {
     public GameObject Player;
     public GameObject PlayCamera;
-    public GameObject Kugel;
+    public GameObject Kugel,Kugel2;
     public GameObject Position; 
-    private bool PlayCameraActive;  
+    private bool PlayCameraActive;
+    private int a = 0; 
 	// Use this for initialization
 	void Start () {
         PlayCamera.GetComponent<Camera>().enabled = false;
@@ -17,35 +18,27 @@ public class Manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (PlayCameraActive)
-            {
-                PlayCamera.GetComponent<Camera>().enabled = false;
-                Player.GetComponentInChildren<Camera>().enabled = true;
-                PlayCameraActive = false;
-                Cursor.visible = false; 
-            }
-            else
-            {
-                PlayCamera.GetComponent<Camera>().enabled =true ;
-                Player.GetComponentInChildren<Camera>().enabled =false;
-                PlayCameraActive = true ;
-                Cursor.visible = true; 
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Position = Position.GetComponent<BoardPlaces>().NextPlace;
-            Kugel.transform.position = Position.transform.position;
+            Kugel.GetComponent<Kugel>().MoveNSteps(5);
             
         }
-        if (Input.GetKeyDown(KeyCode.S)) { 
+        if (Input.GetKeyDown(KeyCode.S)) {
+            if (a == 0)
+            {
+                Position = Position.GetComponent<BoardPlaces>().BeforePlace;
+                Kugel.GetComponent<Kugel>().momentaryPlace = Position;
+                Kugel.transform.position = Position.transform.position;
+                a++;
+            }else
+            {
+                Position = Position.GetComponent<BoardPlaces>().BeforePlace;
+                Kugel2.GetComponent<Kugel>().momentaryPlace = Position;
+                Kugel2.transform.position = Position.transform.position;
+            }
 
-            Position = Position.GetComponent<BoardPlaces>().BeforePlace;
-        Kugel.transform.position = Position.transform.position;
-            
+
         }
 	}
 }
