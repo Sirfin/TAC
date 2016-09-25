@@ -62,4 +62,24 @@ public class Kugel : MonoBehaviour {
         this.transform.position = counter.transform.position;
         return true; 
     }
+    public bool MoveNStepsBackwards(int n)
+    {
+        GameObject counter;
+
+        counter = momentaryPlace;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (counter.GetComponent<BoardPlaces>().KugelOnThisSpot != null && i > 0) return false;
+            counter = counter.GetComponent<BoardPlaces>().BeforePlace; //Suche den Spot in N Schritten und gehen dorthin
+        }
+
+
+        momentaryPlace.GetComponent<BoardPlaces>().KugelOnThisSpot = null;
+        if (counter.GetComponent<BoardPlaces>().KugelOnThisSpot != null) counter.GetComponent<BoardPlaces>().KugelOnThisSpot.GetComponent<Kugel>().Geschlagen();
+        this.momentaryPlace = counter;
+        counter.GetComponent<BoardPlaces>().KugelOnThisSpot = this.gameObject;
+        this.transform.position = counter.transform.position;
+        return true;
+    }
 }

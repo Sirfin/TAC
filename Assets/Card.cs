@@ -10,7 +10,8 @@ public class Card : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-	
+        Debug.Log("Suche Camera");
+       
 	}
     virtual protected void CardFunction(){
     }
@@ -20,6 +21,7 @@ public class Card : MonoBehaviour {
 	}
     void OnMouseDown ()
     {
+        Debug.Log("Einmal");
         foreach(GameObject element in MyPlayer.GetComponent<Player>().MyCards)
         {
             if (element != this.gameObject) element.GetComponent<Card>().searchForKugel = false; 

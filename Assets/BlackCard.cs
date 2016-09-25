@@ -7,8 +7,8 @@ public class BlackCard : Card {
     private GameObject Kugel;
     // Use this for initialization
     void Start () {
-	
-	}
+        PlayCamera = GameObject.FindGameObjectWithTag("BoardCamera").GetComponent<Camera>(); ;
+    }
 	
 	// Update is called once per frame
 	void Update () {
